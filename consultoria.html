@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultoria Online - Raquel Personal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #363636 100%);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: transparent;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .top-bar.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .logo-container {
+            margin-left: 50px;
+        }
+
+        .logo {
+            height: 150px;
+            width: auto;
+        }
+
+        .nav-container {
+            margin-right: 50px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 60px 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .info-card h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .info-card ul {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+
+        .info-card li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-card li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+            }
+
+            .logo {
+                height: 80px;
+            }
+
+            .logo-container {
+                margin: 0;
+            }
+
+            .nav-container {
+                margin: 10px 0;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo-container">
+            <img src="/logo/logo2 (1).png" alt="Logo Raquel Personal" class="logo">
+        </div>
+        <div class="nav-container">
+            <nav>
+                <a href="index.html">Voltar ao Início</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="hero-section">
+        <img src="/imagens/consultoria.png" alt="Consultoria Online" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Consultoria Online</h1>
+            <p style="font-size: 1.4em; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">
+                Alcance seus objetivos com treinos personalizados à distância
+            </p>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2 style="text-align: center; font-size: 2.8em; margin-bottom: 30px;">
+            Treine onde estiver
+        </h2>
+        <p style="text-align: center; font-size: 1.2em; max-width: 800px; margin: 0 auto;">
+            Com a consultoria online, você tem acesso a treinos personalizados e acompanhamento 
+            profissional mesmo à distância. Através de nosso aplicativo, monitoro seu progresso 
+            e faço ajustes necessários para garantir seus resultados.
+        </p>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>O Que Oferecemos</h3>
+                <ul>
+                    <li>Programa personalizado</li>
+                    <li>Vídeos explicativos</li>
+                    <li>Suporte via aplicativo</li>
+                    <li>Planilha nutricional</li>
+                    <li>Ajustes mensais</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>Acompanhamento</h3>
+                <ul>
+                    <li>Chat direto com a personal</li>
+                    <li>Avaliações periódicas</li>
+                    <li>Feedback constante</li>
+                    <li>Adaptações do treino</li>
+                    <li>Suporte motivacional</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>Como Funciona</h3>
+                <ul>
+                    <li>Avaliação inicial online</li>
+                    <li>Definição de objetivos</li>
+                    <li>Programa personalizado</li>
+                    <li>Acompanhamento via app</li>
+                    <li>Resultados garantidos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const topBar = document.querySelector('.top-bar');
+            if (window.scrollY > 50) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

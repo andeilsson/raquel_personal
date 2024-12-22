@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raquel Personal Trainer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #363636 100%);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: transparent;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            transition: background 0.3s ease;
+        }
+
+        .top-bar.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .logo-container {
+            margin-left: 50px;
+        }
+
+        .logo {
+            height: 150px;
+            width: auto;
+            transition: height 0.3s ease;
+        }
+
+        /* Menu Button Styles */
+        .menu-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 15px;
+            margin-right: 30px;
+            z-index: 1001;
+            display: none;
+        }
+
+        .menu-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 24px;
+            width: 30px;
+            padding: 0;
+        }
+
+        .menu-icon span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #fff;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon.open span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-icon.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            margin-right: 50px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+                        url('/altere.jpg') center/cover;
+            height: 100vh;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding-top: 90px;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Sections Styles */
+        section {
+            padding: 80px 20px;
+            margin: 40px auto;
+            max-width: 1200px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.8em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .service-card {
+            position: relative;
+            min-height: 300px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card:hover::before {
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .service-card.personal {
+            background: url('/imagens/apresenta.webp') center/cover;
+        }
+
+        .service-card.consultoria {
+            background: url('/imagens/consultoria.png') center/cover;
+        }
+
+        .service-card.emagrecimento {
+            background: url('/imagens/emagrecimentp.jpg') center/cover;
+        }
+
+        .service-card.hipertrofia {
+            background: url('/imagens/hipertrofia.jpeg') center/cover;
+        }
+
+        .service-card h3, .service-card p {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card p {
+            font-size: 1.1em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Contact Section */
+        #contato {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('/localidade.png') center/cover;
+            overflow: hidden;
+            border-radius: 20px;
+            padding: 60px 20px;
+            margin-bottom: 0;
+        }
+
+        #contato::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .contact-info {
+            position: relative;
+            z-index: 2;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            width: fit-content;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-info p {
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 60px;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .menu-button {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 250px;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding-top: 80px;
+                margin: 0;
+                transition: 0.3s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu a {
+                width: 80%;
+                margin: 10px auto;
+                text-align: center;
+            }
+
+            .logo {
+                height: 80px;
+            }
+
+            .logo-container {
+                margin-left: 20px;
+            }
+
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            section {
+                margin: 20px 15px;
+                padding: 40px 15px;
+            }
+
+            .service-card {
+                min-height: 250px;
+            }
+
+            .contact-info {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo-container">
+            <img src="/logo2 (1).png" alt="Logo Raquel Personal" class="logo">
+        </div>
+        <button class="menu-button">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <nav class="nav-menu">
+            <a href="#sobre">Sobre</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <h1>Raquel Personal Trainer</h1>
+            <p style="font-size: 1.4em; margin-top: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">
+                Transformando vidas através do exercício físico
+            </p>
+        </div>
+    </header>
+
+    <section id="sobre">
+        <h2>Sobre o Personal Trainer</h2>
+        <p style="text-align: center; font-size: 1.2em; max-width: 800px; margin: 0 auto;">
+            Raquel é especialista em transformação física e bem-estar. 
+            Formada em Educação Física e pós-graduada em Treinamento Esportivo, 
+            ela desenvolve programas personalizados que se adaptam às necessidades e objetivos de cada aluno.
+        </p>
+    </section>
+
+    <section id="servicos">
+        <h2>Serviços</h2>
+        <div class="services-grid">
+            <a href="personal.html" class="service-card personal">
+                <h3>Personal Trainer em Porto Velho</h3>
+                <p>Treinos personalizados e acompanhamento exclusivo para maximizar seus resultados</p>
+            </a>
+            <a href="consultoria.html" class="service-card consultoria">
+                <h3>Consultoria Online</h3>
+                <p>Programas de treino à distância com suporte contínuo via aplicativo</p>
+            </a>
+            <a href="emagrecimento.html" class="service-card emagrecimento">
+                <h3>Emagrecimento</h3>
+                <p>Programas específicos para perda de peso com acompanhamento nutricional</p>
+            </a>
+            <a href="hipertrofia.html" class="service-card hipertrofia">
+                <h3>Hipertrofia</h3>
+                <p>Ganho de massa muscular e força com técnicas avançadas de treinamento</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="contato">
+        <h2>Contato</h2>
+        <div class="contact-info">
+            <p>📱 Telefone: (69) 9 9999-9999</p>
+            <p>📧 Email: contato@raquelpersonaltrainer.com.br</p>
+            <p>📍 Porto Velho - Rondônia, RO</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Raquel Personal Trainer © 2024 Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const menuButton = document.querySelector('.menu-button');
+        const navMenu = document.querySelector('.nav-menu');
+        const menuIcon = document.querySelector('.menu-icon');
+
+        menuButton.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuIcon.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuIcon.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                navMenu.classList.remove('active');
+                menuIcon.classList.remove('open');
+            }
+        });
+
+        window.addEventListener('scroll', function() {
+            const topBar = document.querySelector('.top-bar');
+            if (window.scrollY > 50) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
